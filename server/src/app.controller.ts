@@ -2,7 +2,7 @@ import {
   Controller,
   Get,
   Post,
-  Put,
+  Delete,
   Body,
   Param,
   HttpStatus,
@@ -27,12 +27,23 @@ export class AppController {
     return this.appService.getUsers();
   }
 
-  @Get('users/:id')
+  @Get('users/:email')
   @HttpCode(HttpStatus.OK)
-  getUser(@Param() params: { id: number }) {
+  getUserById(@Param() params: { name: string; email: string }) {
+    const { email } = params;
+    try {
+      return this.appService.getUser(email);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Get('users/:id/courses')
+  @HttpCode(HttpStatus.OK)
+  getCoursesUser(@Param() params: { id: number }) {
     const { id } = params;
     try {
-      return this.appService.getUser(id);
+      return this.appService.getCoursesUser(id);
     } catch (error) {
       throw error;
     }
@@ -59,5 +70,15 @@ export class AppController {
     }
   }
 
+  @Delete('users/:id')
+  @HttpCode(HttpStatus.OK)
+  deleteUser(@Param() params: { id: number }) {
+    const { id } = params;
+    try {
+      return this.appService.deleteUser(id);
+    } catch (error) {
+      throw error;
+    }
+  }
   // @PUT('users/:id/courses/:courseId')
 }
