@@ -43,12 +43,14 @@ export class AppService {
 
   async getCoursesUser(id: number) {
     const query =
-      'SELECT u.name, c.id, c.name AS course_name, c.program, c.status FROM my_db.public.users AS u LEFT JOIN my_db.public.courses AS c ON u.id = c.user_id WHERE u.id = $1';
+      'SELECT u.name, u.email, c.id, c.name AS course_name, c.program, c.status, c.user_id FROM my_db.public.users AS u LEFT JOIN my_db.public.courses AS c ON u.id = c.user_id WHERE u.id = $1';
     try {
       const res = await this.clientPg.query(query, [id]);
-      const nameUser = res.rows[0].name;
-      // return res.rows;
-      return { nameUser, courses: res.rows };
+      const userData = {
+        userName: res.rows[0].name,
+        userEmail: res.rows[0].email,
+      };
+      return { userData: userData, courses: res.rows };
     } catch (error) {
       throw error;
     }
@@ -97,6 +99,16 @@ export class AppService {
         [id],
       );
       return 'User deleted';
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteCourse(id: number) {
+    const query = 'DELETE FROM public.courses WHERE id = $1';
+    try {
+      await this.clientPg.query(query, [id]);
+      return 'Course deleted';
     } catch (error) {
       throw error;
     }

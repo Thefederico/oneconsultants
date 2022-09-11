@@ -80,5 +80,15 @@ export class AppController {
       throw error;
     }
   }
-  // @PUT('users/:id/courses/:courseId')
+
+  @Delete('users/courses/:idCourse')
+  @HttpCode(HttpStatus.OK)
+  deleteCourse(@Param() params: { idCourse: number }) {
+    const { idCourse } = params;
+    try {
+      return this.appService.deleteCourse(idCourse);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
