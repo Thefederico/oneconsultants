@@ -12,10 +12,14 @@ export interface Courses {
   course_name: string;
   program: string;
   status: string;
+  user_id: string | number;
 }
 
 export interface UserCourse {
-  userName: string;
+  userData: {
+    userName: User['name'];
+    userEmail: User['email'];
+  };
   courses: Courses[];
 }
 
