@@ -17,10 +17,16 @@ export interface Courses {
 
 export interface UserCourse {
   userData: {
-    userName: User['name'];
-    userEmail: User['email'];
+    userName: User["name"];
+    userEmail: User["email"];
   };
   courses: Courses[];
+}
+
+export interface DataForm {
+  nameCourse: string;
+  program: string;
+  status: CourseStatus;
 }
 
 export type CourseStatus = "Approved" | "Incomplete" | "Failed";
