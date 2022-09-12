@@ -40,7 +40,17 @@ function Summary({ name, email, age, values, setModal }: Props) {
           </tr>
           <tr className="">
             <td className="py-2">Status:</td>
-            <td>{values.status}</td>
+            <td
+              className={`px-4 py-2 border border-gray-400 text-center ${
+                values.status === "Approved"
+                  ? "text-green-400"
+                  : values.status === "Incomplete"
+                  ? "text-yellow-400"
+                  : "text-red-400"
+              }`}
+            >
+              {values.status}
+            </td>
           </tr>
         </tbody>
       </table>
