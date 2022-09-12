@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "../Modal";
 import { CoursesStudents } from "./CoursesStudents";
 import { useStudents } from "./useStudents.hook";
-import { User, Courses, UserCourse } from "../../types";
+import { User } from "../../types";
+import { TrashIcon } from "../../assets/TrashIcon";
 
 export function TableRegister() {
-  const [modal, setModal] = React.useState(false);
+  const [modal, setModal] = useState(false);
 
-  const { students, courses, getStudents, getCourses, deleteUser } =
-    useStudents();
+  const {
+    students,
+    courses,
+    getStudents,
+    getCourses,
+    deleteUser,
+    deleteCourse,
+  } = useStudents();
 
   const rederStudents = (): JSX.Element[] => {
     return students.map((student: User) => {
@@ -21,7 +28,7 @@ export function TableRegister() {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={() => {
-                rederCourse(student.id);
+                setCourse(student.id);
               }}
             >
               Courses
@@ -29,12 +36,11 @@ export function TableRegister() {
           </td>
           <td className="px-4 py-2">
             <button
-              className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={() => {
                 deleteUser(student.id);
               }}
             >
-              Delete
+              <TrashIcon />
             </button>
           </td>
         </tr>
@@ -42,7 +48,7 @@ export function TableRegister() {
     });
   };
 
-  const rederCourse = (id: number) => {
+  const setCourse = (id: number) => {
     getCourses(id);
     setModal((prevstate: boolean) => !prevstate);
   };
@@ -83,7 +89,8 @@ export function TableRegister() {
           <CoursesStudents
             courses={courses.courses}
             setModal={setModal}
-            userName={courses.userName}
+            user={courses.userData}
+            deleteCourse={deleteCourse}
           />
         </Modal>
       )}
