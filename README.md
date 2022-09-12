@@ -63,13 +63,18 @@ client
 ├─ src
 │  ├─ App.tsx
 │  ├─ app
+│  │  ├─ api
+│  │  │  └─ fetch.ts
 │  │  └─ store.ts
 │  ├─ assets
+│  │  └─ TrashIcon.tsx
 │  ├─ components
 │  │  ├─ DataAcademic.tsx
 │  │  ├─ DataPersonal.tsx
 │  │  ├─ Header.tsx
 │  │  ├─ Modal.tsx
+│  │  ├─ SelectStatusCourse.tsx
+│  │  ├─ Summary.tsx
 │  │  └─ TableRegister
 │  │     ├─ CoursesStudents.tsx
 │  │     ├─ index.tsx
@@ -103,7 +108,6 @@ npm install
 
 #Modo desarrollo
 npm run start:dev
-
 ```
 
 ## Cliente en modo desarrollo
@@ -117,7 +121,3 @@ npm install
 #Modo desarrollo
 npm run dev
 ```
-
-
-
-
